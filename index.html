@@ -1,0 +1,32 @@
+
+<html>
+  <head>
+    <title>JQuery Demo</title>
+    <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery/jquery-1.7.2.min.js"></script>    
+    <script type="text/javascript">
+         $(document).ready(function() { 
+              $("#Button").click(function() { 
+                $("b").hide(1000); 
+                callDelete();
+                $("h1").hide(500); 
+              }); 
+         });
+
+         function callDelete(){
+            var fromDate = new Date("January 01, 2018 00:00:00");
+            var toDate = new Date("January 01, 2018 23:01:01");
+            // fromDate: '2018-01-01', 
+            //             toDate: '2018-01-01', 
+         }
+    </script>
+  </head>
+  <body>
+    <form id="form1" runat="server"> 
+            <h1>H1 Contents Here.</h1>
+            <br /> 
+            <b>Bold Contents Here.</b>
+            <br /> 
+            <input type="button" id="Button" runat="server" value="Hide Contents" />
+    </form>
+  </body>
+</html>
