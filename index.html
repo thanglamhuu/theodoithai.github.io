@@ -8,13 +8,28 @@
               $("#Button").click(function() { 
                 $("b").hide(1000); 
                 callDelete();
-                $("h1").hide(500); 
               }); 
+              displayHowLong();
          });
 
+         function displayHowLong(){
+          var fromDate = new Date("January 18, 2018 10:00:00");
+          var toDate = new Date();
+          var timeOfDay = 1000*60*60*24;
+          var diff = Math.floor((toDate.getTime() - fromDate.getTime())/timeOfDay);
+            
+          $("#explain").text("Từ " + fromDate.toISOString().slice(0,10)
+            + " đến " + toDate.toISOString().slice(0,10)
+            + " là " + diff + " ngày = " 
+            + Math.floor(diff/7) + " tuần");
+
+          var bornDate = fromDate;
+          bornDate.setTime(fromDate.getTime()+timeOfDay*280);
+
+          $("#timeBorn").text("Dự sinh ngày " + bornDate.toISOString().slice(0,10));
+         }
+
          function callDelete(){
-            var fromDate = new Date("January 01, 2018 00:00:00");
-            var toDate = new Date("January 01, 2018 23:01:01");
             // fromDate: '2018-01-01', 
             //             toDate: '2018-01-01', 
          }
@@ -24,7 +39,9 @@
     <form id="form1" runat="server"> 
             <h1>H1 Contents Here.</h1>
             <br /> 
-            <b>Bold Contents Here.</b>
+            <b id="explain">Bold Contents Here.</b>
+            <br /> 
+            <b id="timeBorn">Bold Contents Here.</b>
             <br /> 
             <input type="button" id="Button" runat="server" value="Hide Contents" />
     </form>
