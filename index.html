@@ -1,41 +1,58 @@
-<!DOCTYPE html>
 <html>
   <head>
-    <title>App</title>
-    <meta name="viewport" content="width=device-width">
-    <link rel="shortcut icon" href="/favicon.ico">
-
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://rsms.me/inter/inter-ui.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
-
-    <!-- Start Single Page Apps for GitHub Pages -->
+    <title>JQuery Demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
-      // Single Page Apps for GitHub Pages
-      // https://github.com/rafrex/spa-github-pages
-      // Copyright (c) 2016 Rafael Pedicini, licensed under the MIT License
-      (function(l) {
-        if (l.search) {
-          var q = {};
-          l.search.slice(1).split('&').forEach(function(v) {
-            var a = v.split('=');
-            q[a[0]] = a.slice(1).join('=').replace(/~and~/g, '&');
-          });
-          if (q.p !== undefined) {
-            window.history.replaceState(null, null,
-              l.pathname.slice(0, -1) + (q.p || '') +
-              (q.q ? ('?' + q.q) : '') +
-              l.hash
-            );
-          }
-        }
-      }(window.location))
+      $(document).ready(function() { 
+          $("#Button").click(function() { 
+            $("b").hide(1000); 
+            callDelete();
+          }); 
+          displayHowLong();
+      });
+
+      function displayHowLong(){
+      var fromDate = new Date("January 18, 2018 10:00:00");
+      var toDate = new Date();
+      var timeOfDay = 1000*60*60*24;
+      var diff = Math.floor((toDate.getTime() - fromDate.getTime())/timeOfDay);
+        
+      $("#explain1").text("Từ " + fromDate.toISOString().slice(0,10)
+        + " đến " + toDate.toISOString().slice(0,10));
+      $("#explain2").text(diff + " ngày = " 
+        + Math.floor(diff/7) + " tuần");
+
+      var bornDate = fromDate;
+      bornDate.setTime(fromDate.getTime()+timeOfDay*280);
+
+      $("#timeBorn").text("Dự sinh ngày " + bornDate.toISOString().slice(0,10));
+      }
+
+      function callDelete(){
+        // fromDate: '2018-01-01', 
+        //             toDate: '2018-01-01', 
+      }
     </script>
-    <!-- End Single Page Apps for GitHub Pages -->
   </head>
   <body>
-    <div id="root"></div>
-    <script src="/bundle.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" crossorigin="anonymous"></script>
+    <form id="form1" runat="server"> 
+            <h1>Tính ngày sinh</h1>
+            <span>Con xin Đức Phật A Di Đà gia trì, che chở cho Vợ và các con.</span>
+            <br /> 
+            <span>Chồng rất tri ân vợ đã sinh thành và nuôi dạy, dưỡng dục Bảo Nhi ngoan ngoãn.</span>
+            <br /> 
+            <span>Mong vợ luôn khỏe mạnh an lạc, giữ tâm thiện thế giới hòa bình.</span>
+            <br /> 
+            <b id="explain1">Contents Here.</b>
+            <br /> 
+            <b id="explain2">Contents Here.</b>
+            <br /> 
+            <b id="timeBorn">Contents Here.</b>
+            <br /> 
+            <img src="images/HoaSen_f.png" alt="Tặng hoa sen nè" width="100%">
+            <!--input type="button" id="Button" runat="server" value="Hide Contents" /-->
+    </form>
   </body>
 </html>
