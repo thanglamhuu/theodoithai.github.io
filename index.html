@@ -10,24 +10,39 @@
             $("b").hide(1000); 
             callDelete();
           }); 
-          displayHowLong();
+
+        var lastDate = localStorage.lastDate; 
+        if(!lastDate) 
+          lastDate = ("2018/01/18");
+        $("#lastDate").val(lastDate);
+        displayHowLong();
       });
 
       function displayHowLong(){
-      var fromDate = new Date("January 18, 2018 10:00:00");
-      var toDate = new Date();
-      var timeOfDay = 1000*60*60*24;
-      var diff = Math.floor((toDate.getTime() - fromDate.getTime())/timeOfDay);
-        
-      $("#explain1").text("Từ " + fromDate.toISOString().slice(0,10)
-        + " đến " + toDate.toISOString().slice(0,10));
-      $("#explain2").text(diff + " ngày = " 
-        + Math.floor(diff/7) + " tuần");
+        var lastDate = localStorage.lastDate; 
+        if(!lastDate) 
+          lastDate = ("2018/01/18");
+        //var fromDate = new Date("January 18, 2018 10:00:00");
+        var fromDate = (new Date(lastDate));
+        var toDate = new Date();
+        var timeOfDay = 1000*60*60*24;
+        var diff = Math.floor((toDate.getTime() - fromDate.getTime())/timeOfDay);
+          
+        $("#explain1").text("Từ " + fromDate.toISOString().slice(0,10)
+          + " đến " + toDate.toISOString().slice(0,10));
+        $("#explain2").text(diff + " ngày = " 
+          + Math.floor(diff/7) + " tuần");
 
-      var bornDate = fromDate;
-      bornDate.setTime(fromDate.getTime()+timeOfDay*280);
+        var bornDate = fromDate;
+        bornDate.setTime(fromDate.getTime()+timeOfDay*280);
 
-      $("#timeBorn").text("Dự sinh ngày " + bornDate.toISOString().slice(0,10));
+        $("#timeBorn").text("Dự sinh ngày " + bornDate.toISOString().slice(0,10));
+      }
+      
+      function cal(){
+        console.log($("#lastDate").val());
+        localStorage.lastDate = $("#lastDate").val();
+        displayHowLong();
       }
 
       function callDelete(){
@@ -39,11 +54,12 @@
   <body>
     <form id="form1" runat="server"> 
             <h1>Tính ngày sinh</h1>
-            <span>Con xin Đức Phật A Di Đà gia trì, che chở cho Vợ và các con.</span>
+            <span>Con xin Đức Phật A Di Đà gia trì, che chở cho Vợ và Thai nhi.</span>
             <br /> 
-            <span>Chồng rất tri ân vợ đã sinh thành và nuôi dạy, dưỡng dục Bảo Nhi ngoan ngoãn.</span>
-            <br /> 
-            <span>Mong vợ luôn khỏe mạnh an lạc, giữ tâm thiện thế giới hòa bình.</span>
+            <span>Mong Vợ yêu luôn khỏe mạnh an lạc, giữ tâm thiện thế giới hòa bình.</span>
+            <br />
+            <span>Nhập ngày kinh sau cùng</span>
+            <input type="date" id="lastDate" onchange="cal()"> 
             <br /> 
             <b id="explain1">Contents Here.</b>
             <br /> 
@@ -52,7 +68,6 @@
             <b id="timeBorn">Contents Here.</b>
             <br /> 
             <img src="images/HoaSen_f.png" alt="Tặng hoa sen nè" width="100%">
-            <!--input type="button" id="Button" runat="server" value="Hide Contents" /-->
     </form>
   </body>
 </html>
